@@ -1,5 +1,6 @@
 #region imports
 from copy import deepcopy
+import math
 #endregion
 
 #region function definitions
@@ -73,6 +74,66 @@ def superbowl():
     AFC={'Bills':24, 'Chiefs':38, 'Mahomes':'young enough to be Bradys son'}
     print('NFC Championship: Bucs {} to Packers {}. Brady is {}'.format(NFC['Bucs'],NFC['Packers'], NFC['Brady']))
     print('AFC Championship: Chiefs {} to Bills {}. Mahomes is {}'.format(AFC['Chiefs'], AFC['Bills'], AFC['Mahomes']))
+
+def getLoopy():
+    '''
+    This is a function I'm using to teach the differnce between for and while loops.
+    Generally, a for loop executes for a specified number of iterations whereas a while loop executes until a particular
+    condition is met.
+    :return:
+    '''
+    upperLim = 13
+    # Example 1:  make a list of x values from 0 to 13 in increments of pi/17.  I'll first do this with a for loop.
+    # Step 1: how many intervals?
+    N = int(upperLim/(math.pi/17))  #  this will always round down to a whole number (called floor division)
+    # Step 2: compute interval size
+    h = math.pi/17
+    # Step 2:  make a list of appropriate size
+    list0 = [0]*(N+1)
+    for i in range(N+1):
+        list0[i] = i*h
+
+    # Example 2:  repeat Example 1 with a while loop.
+    # Step 1: initialize a list that is empty
+    list1 = []
+    # Step 2: create 'watch' variable to be incremented each time through the loop
+    xVal = 0.0
+    # Step 3: write the while loop
+    while xVal < upperLim:
+        list1.append(xVal)
+        xVal += h  # incrementally increase xVal using increment operator
+
+    # Example 3:  use a while loop to check the exit condition internally
+    list2 = []
+    xVal = 0.0
+    while True:
+        if xVal < upperLim:
+            list2.append(xVal)
+        else:
+            break
+        xVal += h
+
+    # Example 4:  make a list like example 1, but in reverse order
+    list3 = deepcopy(list0)
+    list3.reverse()
+    list4=[0]*(N+1)
+    for i in range(len(list4)):
+        list4[i]=(N-i)*h
+
+    list5=[]
+    xVal = N*h
+    while xVal>=0:
+        list5.append(xVal)
+        xVal -= h
+
+    # Example 5:  use a list comprehension
+    list6 = [i*h for i in range(N+1)]
+    list7 = deepcopy(list6)
+    list7.reverse()
+    list8=list6[::-1]  # slicing [start index: stop index: step]  If no start index then 0.  If no stop index then length of list-1. If no step, then 1.
+    list9=list6[::]  # effectively creates a deep copy of list6 by copying value of elements.
+    list9.reverse()
+    pass
 
 def exploreCopying():
     """
@@ -161,6 +222,8 @@ def main():
 
     superbowl()
     exploreCopying()
+    getLoopy()
+
 #endregion
 
 # Note:  the starting point when I run or debug the program.
